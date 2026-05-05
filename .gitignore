@@ -361,3 +361,36 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Qt generated files
+ui_*.h
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+*.qm
+
+# Qt Visual Studio Tools
+QtMsBuild/
+
+# Qt deployed plugins (копируются вручную в папку с exe)
+platforms/
+imageformats/
+styles/
+
+# Локальная база данных SQLite (не коммитим — у каждого своя для разработки)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Qt Creator (на случай, если кто-то откроет проект в нём)
+*.pro.user
+*.pro.user.*
+
+# Логи и временные файлы приложения
+/logs/
+*.log
+
+# Резервные копии редакторов
+*~
+*.bak
