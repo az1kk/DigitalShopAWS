@@ -2,5 +2,5 @@
   <Configurations>
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="DigitalShopAWS/DigitalShopAWS.vcxproj" />
+  <Project Path="DigitalShopAWS/DigitalShopAWS.vcxproj" Id="09eccec9-fb2c-4bd5-8e57-2b942c5c09c1" />
 </Solution>

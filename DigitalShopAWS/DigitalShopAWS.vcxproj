@@ -92,11 +92,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="DigitalShopAWS.qrc" />
+    <QtRcc Include="resources.qrc" />
     <QtUic Include="DigitalShopAWS.ui" />
     <QtMoc Include="DigitalShopAWS.h" />
+    <ClCompile Include="database\DatabaseManager.cpp" />
     <ClCompile Include="DigitalShopAWS.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sql\schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="database\DatabaseManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
