@@ -54,6 +54,12 @@
     <ClCompile Include="database\DatabaseManager.cpp">
       <Filter>database</Filter>
     </ClCompile>
+    <ClCompile Include="models\Product.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="repositories\ProductRepository.cpp">
+      <Filter>repositories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -63,6 +69,12 @@
   <ItemGroup>
     <ClInclude Include="database\DatabaseManager.h">
       <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Product.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="repositories\ProductRepository.h">
+      <Filter>repositories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

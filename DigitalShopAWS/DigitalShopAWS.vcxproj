@@ -92,6 +92,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="models\Product.cpp" />
+    <ClCompile Include="repositories\ProductRepository.cpp" />
     <QtRcc Include="resources.qrc" />
     <QtUic Include="DigitalShopAWS.ui" />
     <QtMoc Include="DigitalShopAWS.h" />
@@ -104,6 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="database\DatabaseManager.h" />
+    <ClInclude Include="models\Product.h" />
+    <ClInclude Include="repositories\ProductRepository.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

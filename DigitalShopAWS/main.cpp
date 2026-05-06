@@ -8,13 +8,10 @@ int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
 
-    // Инициализация базы данных.
-    // При первом запуске будет создан файл digitalshop.db и таблицы.
     if (!DatabaseManager::instance().initialize()) {
         QMessageBox::critical(nullptr,
             "Ошибка запуска",
-            "Не удалось инициализировать базу данных.\n"
-            "Подробности в логе приложения.");
+            "Не удалось инициализировать базу данных.");
         return 1;
     }
 
