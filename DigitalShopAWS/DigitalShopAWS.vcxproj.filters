@@ -35,6 +35,9 @@
     <Filter Include="sql">
       <UniqueIdentifier>{a604abee-27c8-4321-b658-fe515a06a880}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{11d3e864-d8e1-498c-a4e7-df1db26b6060}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="DigitalShopAWS.ui">
@@ -60,6 +63,18 @@
     <ClCompile Include="repositories\ProductRepository.cpp">
       <Filter>repositories</Filter>
     </ClCompile>
+    <ClCompile Include="models\User.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="repositories\UserRepository.cpp">
+      <Filter>repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\PasswordHasher.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\LoginDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -76,8 +91,22 @@
     <ClInclude Include="repositories\ProductRepository.h">
       <Filter>repositories</Filter>
     </ClInclude>
+    <ClInclude Include="models\User.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="repositories\UserRepository.h">
+      <Filter>repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\PasswordHasher.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="resources.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ui\LoginDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

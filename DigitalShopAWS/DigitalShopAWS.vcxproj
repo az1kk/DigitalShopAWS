@@ -93,7 +93,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="models\Product.cpp" />
+    <ClCompile Include="models\User.cpp" />
     <ClCompile Include="repositories\ProductRepository.cpp" />
+    <ClCompile Include="repositories\UserRepository.cpp" />
+    <ClCompile Include="ui\LoginDialog.cpp" />
+    <ClCompile Include="utils\PasswordHasher.cpp" />
     <QtRcc Include="resources.qrc" />
     <QtUic Include="DigitalShopAWS.ui" />
     <QtMoc Include="DigitalShopAWS.h" />
@@ -107,7 +111,11 @@
   <ItemGroup>
     <ClInclude Include="database\DatabaseManager.h" />
     <ClInclude Include="models\Product.h" />
+    <ClInclude Include="models\User.h" />
     <ClInclude Include="repositories\ProductRepository.h" />
+    <ClInclude Include="repositories\UserRepository.h" />
+    <QtMoc Include="ui\LoginDialog.h" />
+    <ClInclude Include="utils\PasswordHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
