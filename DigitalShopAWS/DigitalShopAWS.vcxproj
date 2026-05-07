@@ -95,6 +95,7 @@
     <ClCompile Include="models\Customer.cpp" />
     <ClCompile Include="models\Product.cpp" />
     <ClCompile Include="models\User.cpp" />
+    <ClCompile Include="repositories\CustomerRepository.cpp" />
     <ClCompile Include="repositories\ProductRepository.cpp" />
     <ClCompile Include="repositories\UserRepository.cpp" />
     <ClCompile Include="ui\LoginDialog.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="models\Customer.h" />
     <ClInclude Include="models\Product.h" />
     <ClInclude Include="models\User.h" />
+    <ClInclude Include="repositories\CustomerRepository.h" />
     <ClInclude Include="repositories\ProductRepository.h" />
     <ClInclude Include="repositories\UserRepository.h" />
     <QtMoc Include="ui\LoginDialog.h" />
