@@ -92,7 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="models\Customer.cpp" />
     <ClCompile Include="models\Product.cpp" />
     <ClCompile Include="models\User.cpp" />
     <ClCompile Include="repositories\ProductRepository.cpp" />
@@ -110,8 +110,8 @@
     <None Include="sql\schema.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Customer.h" />
     <ClInclude Include="database\DatabaseManager.h" />
+    <ClInclude Include="models\Customer.h" />
     <ClInclude Include="models\Product.h" />
     <ClInclude Include="models\User.h" />
     <ClInclude Include="repositories\ProductRepository.h" />

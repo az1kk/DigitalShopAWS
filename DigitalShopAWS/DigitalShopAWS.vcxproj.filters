@@ -75,7 +75,7 @@
     <ClCompile Include="ui\LoginDialog.cpp">
       <Filter>ui</Filter>
     </ClCompile>
-    <ClCompile Include="Customer.cpp">
+    <ClCompile Include="models\Customer.cpp">
       <Filter>models</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,7 +103,7 @@
     <ClInclude Include="utils\PasswordHasher.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="Customer.h">
+    <ClInclude Include="models\Customer.h">
       <Filter>models</Filter>
     </ClInclude>
   </ItemGroup>
