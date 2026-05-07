@@ -75,6 +75,9 @@
     <ClCompile Include="ui\LoginDialog.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="Customer.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -99,6 +102,9 @@
     </ClInclude>
     <ClInclude Include="utils\PasswordHasher.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Customer.h">
+      <Filter>models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
