@@ -84,6 +84,9 @@
     <ClCompile Include="models\ProductKey.cpp">
       <Filter>models</Filter>
     </ClCompile>
+    <ClCompile Include="repositories\KeyRepository.cpp">
+      <Filter>repositories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -117,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="models\ProductKey.h">
       <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="repositories\KeyRepository.h">
+      <Filter>repositories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
