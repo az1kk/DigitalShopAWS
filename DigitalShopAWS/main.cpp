@@ -10,13 +10,11 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
 
     if (!DatabaseManager::instance().initialize()) {
-        QMessageBox::critical(nullptr,
-            "Ошибка запуска",
+        QMessageBox::critical(nullptr, "Ошибка запуска",
             "Не удалось инициализировать базу данных.");
         return 1;
     }
 
-    // Окно входа. Если пользователь нажал Отмена — выходим из приложения.
     LoginDialog login;
     if (login.exec() != QDialog::Accepted) {
         return 0;
