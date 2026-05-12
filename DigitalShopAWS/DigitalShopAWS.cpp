@@ -1,3 +1,4 @@
+#include "ui/ProductsTab.h"
 #include <QMessageBox>
 #include "DigitalShopAWS.h"
 
@@ -55,9 +56,6 @@ void DigitalShopAWS::setupTabs()
     m_tabs = new QTabWidget(this);
     setCentralWidget(m_tabs);
 
-    // Создаём вкладки-заглушки. Каждая будет заменена на реальный
-    // функциональный виджет на следующих шагах.
-
     auto makePlaceholder = [](const QString& text) {
         QWidget* w = new QWidget;
         QVBoxLayout* layout = new QVBoxLayout(w);
@@ -68,7 +66,10 @@ void DigitalShopAWS::setupTabs()
         return w;
         };
 
-    m_tabs->addTab(makePlaceholder("Вкладка \"Товары\" — в разработке"), "Товары");
+    // Реальная вкладка "Товары"
+    m_tabs->addTab(new ProductsTab(this), "Товары");
+
+    // Заглушки на остальные вкладки
     m_tabs->addTab(makePlaceholder("Вкладка \"Ключи\" — в разработке"), "Ключи");
     m_tabs->addTab(makePlaceholder("Вкладка \"Клиенты\" — в разработке"), "Клиенты");
     m_tabs->addTab(makePlaceholder("Вкладка \"Заказы\" — в разработке"), "Заказы");

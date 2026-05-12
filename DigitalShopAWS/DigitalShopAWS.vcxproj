@@ -101,6 +101,8 @@
     <ClCompile Include="repositories\ProductRepository.cpp" />
     <ClCompile Include="repositories\UserRepository.cpp" />
     <ClCompile Include="ui\LoginDialog.cpp" />
+    <ClCompile Include="ui\ProductEditDialog.cpp" />
+    <ClCompile Include="ui\ProductsTab.cpp" />
     <ClCompile Include="utils\PasswordHasher.cpp" />
     <QtRcc Include="resources.qrc" />
     <QtUic Include="DigitalShopAWS.ui" />
@@ -123,6 +125,8 @@
     <ClInclude Include="repositories\ProductRepository.h" />
     <ClInclude Include="repositories\UserRepository.h" />
     <QtMoc Include="ui\LoginDialog.h" />
+    <QtMoc Include="ui\ProductEditDialog.h" />
+    <QtMoc Include="ui\ProductsTab.h" />
     <ClInclude Include="utils\PasswordHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
