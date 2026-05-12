@@ -1,17 +1,28 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-#include "ui_DigitalShopAWS.h"
 
+class QTabWidget;
+
+/**
+ * @brief Главное окно АРМ.
+ *
+ * Содержит вкладки для управления товарами, ключами, клиентами,
+ * заказами и аналитикой. Каждая вкладка — отдельный виджет.
+ */
 class DigitalShopAWS : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    DigitalShopAWS(QWidget *parent = nullptr);
-    ~DigitalShopAWS();
+    explicit DigitalShopAWS(QWidget* parent = nullptr);
+    ~DigitalShopAWS() = default;
 
 private:
-    Ui::DigitalShopAWSClass ui;
-};
+    void setupUi();
+    void setupMenuBar();
+    void setupStatusBar();
+    void setupTabs();
 
+    QTabWidget* m_tabs = nullptr;
+};
