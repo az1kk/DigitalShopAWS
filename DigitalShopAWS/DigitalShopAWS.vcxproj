@@ -63,6 +63,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -102,6 +112,8 @@
     <ClCompile Include="repositories\UserRepository.cpp" />
     <ClCompile Include="ui\CustomerEditDialog.cpp" />
     <ClCompile Include="ui\CustomersTab.cpp" />
+    <ClCompile Include="ui\KeyEditDialog.cpp" />
+    <ClCompile Include="ui\KeysTab.cpp" />
     <ClCompile Include="ui\LoginDialog.cpp" />
     <ClCompile Include="ui\ProductEditDialog.cpp" />
     <ClCompile Include="ui\ProductsTab.cpp" />
@@ -131,6 +143,8 @@
     <QtMoc Include="ui\ProductsTab.h" />
     <QtMoc Include="ui\CustomerEditDialog.h" />
     <QtMoc Include="ui\CustomersTab.h" />
+    <QtMoc Include="ui\KeyEditDialog.h" />
+    <QtMoc Include="ui\KeysTab.h" />
     <ClInclude Include="utils\PasswordHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

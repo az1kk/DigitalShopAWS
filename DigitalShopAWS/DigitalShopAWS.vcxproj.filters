@@ -99,6 +99,12 @@
     <ClCompile Include="ui\CustomersTab.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="ui\KeyEditDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\KeysTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -154,6 +160,12 @@
       <Filter>ui</Filter>
     </QtMoc>
     <QtMoc Include="ui\CustomersTab.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\KeyEditDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\KeysTab.h">
       <Filter>ui</Filter>
     </QtMoc>
   </ItemGroup>

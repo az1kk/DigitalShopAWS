@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS product_keys (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     product_id INTEGER NOT NULL REFERENCES products(id),
-    key_value  TEXT NOT NULL,
+    key_value  TEXT NOT NULL UNIQUE,
     status     TEXT NOT NULL DEFAULT 'available',
     added_at   DATETIME DEFAULT CURRENT_TIMESTAMP,
     sold_at    DATETIME
