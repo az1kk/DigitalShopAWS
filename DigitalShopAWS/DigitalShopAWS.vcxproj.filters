@@ -93,6 +93,12 @@
     <ClCompile Include="ui\ProductsTab.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="ui\CustomerEditDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\CustomersTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -142,6 +148,12 @@
       <Filter>ui</Filter>
     </QtMoc>
     <QtMoc Include="ui\ProductsTab.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\CustomerEditDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\CustomersTab.h">
       <Filter>ui</Filter>
     </QtMoc>
   </ItemGroup>

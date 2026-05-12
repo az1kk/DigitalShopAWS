@@ -1,3 +1,4 @@
+#include "ui/CustomersTab.h"
 #include "ui/ProductsTab.h"
 #include <QMessageBox>
 #include "DigitalShopAWS.h"
@@ -68,10 +69,10 @@ void DigitalShopAWS::setupTabs()
 
     // Реальная вкладка "Товары"
     m_tabs->addTab(new ProductsTab(this), "Товары");
+    m_tabs->addTab(new CustomersTab(this), "Клиенты");
 
     // Заглушки на остальные вкладки
     m_tabs->addTab(makePlaceholder("Вкладка \"Ключи\" — в разработке"), "Ключи");
-    m_tabs->addTab(makePlaceholder("Вкладка \"Клиенты\" — в разработке"), "Клиенты");
     m_tabs->addTab(makePlaceholder("Вкладка \"Заказы\" — в разработке"), "Заказы");
     m_tabs->addTab(makePlaceholder("Вкладка \"Аналитика\" — в разработке"), "Аналитика");
 }
