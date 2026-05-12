@@ -87,6 +87,24 @@
     <ClCompile Include="repositories\KeyRepository.cpp">
       <Filter>repositories</Filter>
     </ClCompile>
+    <ClCompile Include="ui\ProductEditDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ProductsTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\CustomerEditDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\CustomersTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\KeyEditDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\KeysTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -130,6 +148,24 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ui\LoginDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ProductEditDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ProductsTab.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\CustomerEditDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\CustomersTab.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\KeyEditDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\KeysTab.h">
       <Filter>ui</Filter>
     </QtMoc>
   </ItemGroup>

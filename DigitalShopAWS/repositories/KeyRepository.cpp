@@ -1,4 +1,4 @@
-#include "KeyRepository.h"
+Ôªø#include "KeyRepository.h"
 #include "../database/DatabaseManager.h"
 
 #include <QSqlQuery>
@@ -127,7 +127,16 @@ bool KeyRepository::save(ProductKey& key)
     query.bindValue(":status", ProductKey::statusToString(key.status()));
 
     if (!query.exec()) {
-        m_lastError = query.lastError().text();
+        const QString rawError = query.lastError().text();
+        // SQLite –∫–∏–¥–∞–µ—Ç –æ—à–∏–±–∫—É —Å —É–ø–æ–º–∏–Ω–∞–Ω–∏–µ–º UNIQUE constraint ‚Äî –ø–µ—Ä–µ–≤–µ–¥—ë–º –µ—ë.
+        if (rawError.contains("UNIQUE", Qt::CaseInsensitive)
+            && rawError.contains("key_value", Qt::CaseInsensitive)) {
+            m_lastError = "–¢–∞–∫–æ–π –∫–ª—é—á —É–∂–µ —Å—É—â–µ—Å—Ç–≤—É–µ—Ç –≤ –±–∞–∑–µ. "
+                "–ö–∞–∂–¥—ã–π –∫–ª—é—á –¥–æ–ª–∂–µ–Ω –±—ã—Ç—å —É–Ω–∏–∫–∞–ª—å–Ω—ã–º.";
+        }
+        else {
+            m_lastError = rawError;
+        }
         qWarning() << "KeyRepository::save failed:" << m_lastError;
         return false;
     }
@@ -157,9 +166,9 @@ ProductKey KeyRepository::reserveOneAvailable(int productId)
 {
     QSqlDatabase db = DatabaseManager::instance().database();
 
-    // »ÒÔÓÎ¸ÁÛÂÏ Ú‡ÌÁ‡ÍˆË˛: ÎË·Ó Ó·Â ÓÔÂ‡ˆËË (‚˚·Ó + ÂÁÂ‚) ÔÓıÓ‰ˇÚ,
-    // ÎË·Ó Ó·Â ÓÚÍ‡Ú˚‚‡˛ÚÒˇ. ›ÚÓ Á‡˘Ë˘‡ÂÚ ÓÚ ÔÓ‚ÚÓÌÓÈ ‚˚‰‡˜Ë Ó‰ÌÓ„Ó
-    // Ë ÚÓ„Ó ÊÂ ÍÎ˛˜‡ ‰‚ÛÏ Ô‡‡ÎÎÂÎ¸Ì˚Ï Á‡Í‡Á‡Ï.
+    // –ò—Å–ø–æ–ª—å–∑—É–µ–º —Ç—Ä–∞–Ω–∑–∞–∫—Ü–∏—é: –ª–∏–±–æ –æ–±–µ –æ–ø–µ—Ä–∞—Ü–∏–∏ (–≤—ã–±–æ—Ä + —Ä–µ–∑–µ—Ä–≤) –ø—Ä–æ—Ö–æ–¥—è—Ç,
+    // –ª–∏–±–æ –æ–±–µ –æ—Ç–∫–∞—Ç—ã–≤–∞—é—Ç—Å—è. –≠—Ç–æ –∑–∞—â–∏—â–∞–µ—Ç –æ—Ç –ø–æ–≤—Ç–æ—Ä–Ω–æ–π –≤—ã–¥–∞—á–∏ –æ–¥–Ω–æ–≥–æ
+    // –∏ —Ç–æ–≥–æ –∂–µ –∫–ª—é—á–∞ –¥–≤—É–º –ø–∞—Ä–∞–ª–ª–µ–ª—å–Ω—ã–º –∑–∞–∫–∞–∑–∞–º.
     if (!db.transaction()) {
         m_lastError = "Failed to begin transaction";
         return ProductKey();

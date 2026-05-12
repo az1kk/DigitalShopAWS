@@ -36,12 +36,12 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>qt</QtInstall>
+    <QtInstall>Qt6-vcpkg</QtInstall>
     <QtModules>core;gui;widgets;sql</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>qt</QtInstall>
+    <QtInstall>Qt6-vcpkg</QtInstall>
     <QtModules>core;gui;widgets;sql</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -63,6 +63,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -100,7 +110,13 @@
     <ClCompile Include="repositories\KeyRepository.cpp" />
     <ClCompile Include="repositories\ProductRepository.cpp" />
     <ClCompile Include="repositories\UserRepository.cpp" />
+    <ClCompile Include="ui\CustomerEditDialog.cpp" />
+    <ClCompile Include="ui\CustomersTab.cpp" />
+    <ClCompile Include="ui\KeyEditDialog.cpp" />
+    <ClCompile Include="ui\KeysTab.cpp" />
     <ClCompile Include="ui\LoginDialog.cpp" />
+    <ClCompile Include="ui\ProductEditDialog.cpp" />
+    <ClCompile Include="ui\ProductsTab.cpp" />
     <ClCompile Include="utils\PasswordHasher.cpp" />
     <QtRcc Include="resources.qrc" />
     <QtUic Include="DigitalShopAWS.ui" />
@@ -123,6 +139,12 @@
     <ClInclude Include="repositories\ProductRepository.h" />
     <ClInclude Include="repositories\UserRepository.h" />
     <QtMoc Include="ui\LoginDialog.h" />
+    <QtMoc Include="ui\ProductEditDialog.h" />
+    <QtMoc Include="ui\ProductsTab.h" />
+    <QtMoc Include="ui\CustomerEditDialog.h" />
+    <QtMoc Include="ui\CustomersTab.h" />
+    <QtMoc Include="ui\KeyEditDialog.h" />
+    <QtMoc Include="ui\KeysTab.h" />
     <ClInclude Include="utils\PasswordHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
