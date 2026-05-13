@@ -105,6 +105,18 @@
     <ClCompile Include="ui\KeysTab.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="models\Order.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="repositories\OrderRepository.cpp">
+      <Filter>repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\CreateOrderDialog.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\OrdersTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -142,6 +154,12 @@
     <ClInclude Include="repositories\KeyRepository.h">
       <Filter>repositories</Filter>
     </ClInclude>
+    <ClInclude Include="models\Order.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="repositories\OrderRepository.h">
+      <Filter>repositories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="resources.qrc" />
@@ -166,6 +184,12 @@
       <Filter>ui</Filter>
     </QtMoc>
     <QtMoc Include="ui\KeysTab.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\CreateOrderDialog.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\OrdersTab.h">
       <Filter>ui</Filter>
     </QtMoc>
   </ItemGroup>

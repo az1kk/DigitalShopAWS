@@ -103,18 +103,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="models\Customer.cpp" />
+    <ClCompile Include="models\Order.cpp" />
     <ClCompile Include="models\Product.cpp" />
     <ClCompile Include="models\ProductKey.cpp" />
     <ClCompile Include="models\User.cpp" />
     <ClCompile Include="repositories\CustomerRepository.cpp" />
     <ClCompile Include="repositories\KeyRepository.cpp" />
+    <ClCompile Include="repositories\OrderRepository.cpp" />
     <ClCompile Include="repositories\ProductRepository.cpp" />
     <ClCompile Include="repositories\UserRepository.cpp" />
+    <ClCompile Include="ui\CreateOrderDialog.cpp" />
     <ClCompile Include="ui\CustomerEditDialog.cpp" />
     <ClCompile Include="ui\CustomersTab.cpp" />
     <ClCompile Include="ui\KeyEditDialog.cpp" />
     <ClCompile Include="ui\KeysTab.cpp" />
     <ClCompile Include="ui\LoginDialog.cpp" />
+    <ClCompile Include="ui\OrdersTab.cpp" />
     <ClCompile Include="ui\ProductEditDialog.cpp" />
     <ClCompile Include="ui\ProductsTab.cpp" />
     <ClCompile Include="utils\PasswordHasher.cpp" />
@@ -131,11 +135,13 @@
   <ItemGroup>
     <ClInclude Include="database\DatabaseManager.h" />
     <ClInclude Include="models\Customer.h" />
+    <ClInclude Include="models\Order.h" />
     <ClInclude Include="models\Product.h" />
     <ClInclude Include="models\ProductKey.h" />
     <ClInclude Include="models\User.h" />
     <ClInclude Include="repositories\CustomerRepository.h" />
     <ClInclude Include="repositories\KeyRepository.h" />
+    <ClInclude Include="repositories\OrderRepository.h" />
     <ClInclude Include="repositories\ProductRepository.h" />
     <ClInclude Include="repositories\UserRepository.h" />
     <QtMoc Include="ui\LoginDialog.h" />
@@ -145,6 +151,8 @@
     <QtMoc Include="ui\CustomersTab.h" />
     <QtMoc Include="ui\KeyEditDialog.h" />
     <QtMoc Include="ui\KeysTab.h" />
+    <QtMoc Include="ui\CreateOrderDialog.h" />
+    <QtMoc Include="ui\OrdersTab.h" />
     <ClInclude Include="utils\PasswordHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
