@@ -1,7 +1,6 @@
 #include "DigitalShopAWS.h"
 #include "database/DatabaseManager.h"
 #include "ui/LoginDialog.h"
-
 #include "models/Customer.h"
 #include "models/ProductKey.h"
 #include "repositories/CustomerRepository.h"
@@ -11,10 +10,12 @@
 #include <QtWidgets/QApplication>
 #include <QMessageBox>
 #include <QDebug>
+#include <QIcon>
 
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
+    a.setWindowIcon(QIcon(":/icons/resources/app.ico"));
 
     if (!DatabaseManager::instance().initialize()) {
         QMessageBox::critical(nullptr, "Ошибка запуска",

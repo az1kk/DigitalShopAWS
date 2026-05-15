@@ -159,7 +159,11 @@
     <QtMoc Include="ui\OrdersTab.h" />
     <QtMoc Include="ui\AnalyticsTab.h" />
     <QtMoc Include="ui\StatisticsTab.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="utils\PasswordHasher.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
