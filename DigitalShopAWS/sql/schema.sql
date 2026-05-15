@@ -89,32 +89,89 @@ INSERT OR IGNORE INTO customers (id, name, email, phone)
 VALUES (3, 'Сидоров Алексей Викторович', 'sidorov@yandex.ru', '+7 905 111-22-33');
 
 -- Тестовые ключи для товаров
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (1, 'STEAM-AAAA-1111-BBBB-2222', 'available');
+-- Свободные ключи (для демонстрации работы программы — создания новых заказов)
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status)
+VALUES (1, 1, 'STEAM-AAAA-1111-BBBB-2222', 'available');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (1, 'STEAM-CCCC-3333-DDDD-4444', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status)
+VALUES (2, 1, 'STEAM-CCCC-3333-DDDD-4444', 'available');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (1, 'STEAM-EEEE-5555-FFFF-6666', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status)
+VALUES (3, 2, 'MC-JAVA-XK7P-Q9MN-RT3V', 'available');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (2, 'MC-JAVA-XK7P-Q9MN-RT3V', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status)
+VALUES (4, 3, 'NETFLIX-USR-2026-MAY-001', 'available');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (2, 'MC-JAVA-LP4D-W8YH-Z2BC', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status)
+VALUES (5, 4, 'SPOT-PREM-MAY26-AB12CD', 'available');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (3, 'NETFLIX-USR-2026-MAY-001', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status)
+VALUES (6, 5, 'OFFICE365-PERS-2026-XYZW-1234', 'available');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (3, 'NETFLIX-USR-2026-MAY-002', 'available');
+-- Проданные ключи (привязаны к тестовым заказам ниже)
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (7, 2, 'MC-JAVA-SOLD-AAA1-2025-12', 'sold', '2025-12-10 14:32:00');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (4, 'SPOT-PREM-MAY26-AB12CD', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (8, 3, 'NETFLIX-SOLD-2026-JAN-001', 'sold', '2026-01-08 11:15:00');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (4, 'SPOT-PREM-MAY26-EF34GH', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (9, 5, 'OFFICE365-SOLD-2026-JAN-XX', 'sold', '2026-01-22 09:48:00');
 
-INSERT OR IGNORE INTO product_keys (product_id, key_value, status)
-VALUES (5, 'OFFICE365-PERS-2026-XYZW-1234', 'available');
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (10, 1, 'STEAM-SOLD-2026-FEB-AAA1', 'sold', '2026-02-05 18:22:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (11, 1, 'STEAM-SOLD-2026-FEB-BBB2', 'sold', '2026-02-18 20:10:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (12, 4, 'SPOT-SOLD-2026-MAR-CCC3', 'sold', '2026-03-12 13:05:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (13, 2, 'MC-JAVA-SOLD-2026-MAR-DD', 'sold', '2026-03-27 16:40:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (14, 3, 'NETFLIX-SOLD-2026-APR-001', 'sold', '2026-04-09 10:30:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (15, 5, 'OFFICE365-SOLD-2026-APR-YY', 'sold', '2026-04-19 15:12:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (16, 2, 'MC-JAVA-SOLD-2026-MAY-EE5', 'sold', '2026-05-03 12:45:00');
+
+INSERT OR IGNORE INTO product_keys (id, product_id, key_value, status, sold_at)
+VALUES (17, 1, 'STEAM-SOLD-2026-MAY-FFF6', 'sold', '2026-05-08 19:20:00');
+
+-- Тестовые заказы (Paid) — для демонстрации аналитики продаж по месяцам
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (1, 1, 2, 7, 1990.00, 'paid', '2025-12-10 14:30:00', '2025-12-10 14:32:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (2, 2, 3, 8, 899.00, 'paid', '2026-01-08 11:10:00', '2026-01-08 11:15:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (3, 3, 5, 9, 3490.00, 'paid', '2026-01-22 09:45:00', '2026-01-22 09:48:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (4, 1, 1, 10, 199.00, 'paid', '2026-02-05 18:20:00', '2026-02-05 18:22:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (5, 2, 1, 11, 199.00, 'paid', '2026-02-18 20:08:00', '2026-02-18 20:10:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (6, 3, 4, 12, 299.00, 'paid', '2026-03-12 13:02:00', '2026-03-12 13:05:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (7, 1, 2, 13, 1990.00, 'paid', '2026-03-27 16:38:00', '2026-03-27 16:40:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (8, 2, 3, 14, 899.00, 'paid', '2026-04-09 10:28:00', '2026-04-09 10:30:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (9, 3, 5, 15, 3490.00, 'paid', '2026-04-19 15:10:00', '2026-04-19 15:12:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (10, 1, 2, 16, 1990.00, 'paid', '2026-05-03 12:43:00', '2026-05-03 12:45:00');
+
+INSERT OR IGNORE INTO orders (id, customer_id, product_id, key_id, price, status, created_at, paid_at)
+VALUES (11, 2, 1, 17, 199.00, 'paid', '2026-05-08 19:18:00', '2026-05-08 19:20:00');
