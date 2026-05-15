@@ -15,7 +15,7 @@
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-    a.setWindowIcon(QIcon(":/icons/resources/app.ico"));
+    a.setWindowIcon(QIcon(":/icons/app.ico"));
 
     if (!DatabaseManager::instance().initialize()) {
         QMessageBox::critical(nullptr, "Ошибка запуска",
