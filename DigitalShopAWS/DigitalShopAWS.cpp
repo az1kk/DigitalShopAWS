@@ -3,7 +3,7 @@
 #include "ui/KeysTab.h"
 #include "ui/OrdersTab.h"
 #include "ui/AnalyticsTab.h"
-#include <QMessageBox>
+#include "ui/StatisticsTab.h"
 #include "DigitalShopAWS.h"
 
 #include <QTabWidget>
@@ -14,6 +14,7 @@
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QMessageBox>
 
 DigitalShopAWS::DigitalShopAWS(QWidget* parent)
     : QMainWindow(parent)
@@ -75,6 +76,7 @@ void DigitalShopAWS::setupTabs()
     m_tabs->addTab(new CustomersTab(this), "Клиенты");
     m_tabs->addTab(new KeysTab(this), "Ключи");
     m_tabs->addTab(new OrdersTab(this), QString::fromUtf8("Заказы"));
+    m_tabs->addTab(new StatisticsTab(this), QString::fromUtf8("Статистика"));
     m_tabs->addTab(new AnalyticsTab(this), QString::fromUtf8("Аналитика"));
 }
 
