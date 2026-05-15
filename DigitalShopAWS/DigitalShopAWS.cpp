@@ -8,6 +8,7 @@
 
 #include <QTabWidget>
 #include <QMenuBar>
+#include <QMenu>
 #include <QStatusBar>
 #include <QLabel>
 #include <QAction>
@@ -15,6 +16,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QMessageBox>
+#include <QIcon>
 
 DigitalShopAWS::DigitalShopAWS(QWidget* parent)
     : QMainWindow(parent)
@@ -36,24 +38,42 @@ void DigitalShopAWS::setupMenuBar()
 {
     QMenuBar* menu = menuBar();
 
-    // Меню "Файл"
-    QMenu* fileMenu = menu->addMenu("&Файл");
+    // === Меню "Файл" ===
+    QMenu* fileMenu = menu->addMenu(QString::fromUtf8("&Файл"));
 
-    QAction* exitAction = fileMenu->addAction("Вы&ход");
+    QAction* exitAction = fileMenu->addAction(QString::fromUtf8("Вы&ход"));
     exitAction->setShortcut(QKeySequence::Quit);
     connect(exitAction, &QAction::triggered, qApp, &QApplication::quit);
 
-    // Меню "Справка"
-    QMenu* helpMenu = menu->addMenu("&Справка");
+    // === Меню "Справка" ===
+    QMenu* helpMenu = menu->addMenu(QString::fromUtf8("&Справка"));
 
-    QAction* aboutAction = helpMenu->addAction("О &программе");
+    QAction* aboutAction = helpMenu->addAction(QString::fromUtf8("О &программе"));
     connect(aboutAction, &QAction::triggered, this, [this]() {
-        QMessageBox::about(this,
-            "О программе",
-            "<b>АРМ менеджера цифровых товаров</b><br><br>"
-            "Учебный проект по дисциплине \"Информатика\".<br>"
-            "Версия 1.0");
+        QMessageBox about(this);
+        about.setWindowTitle(QString::fromUtf8("О программе"));
+        about.setIconPixmap(QIcon(":/icons/app.ico").pixmap(64, 64));
+        about.setTextFormat(Qt::RichText);
+        about.setText(QString::fromUtf8(
+            "<h3>DigitalShopAWS</h3>"
+            "<p><b>АРМ менеджера магазина цифровых товаров</b></p>"
+            "<p>Версия 1.0</p>"
+            "<hr>"
+            "<p><b>Авторы:</b><br>"
+            "Азьмухаметов Руслан<br>"
+            "Макаров Максим</p>"
+            "<p><b>Дисциплина:</b> Информатика<br>"
+            "<b>Тип работы:</b> творческая (групповая)<br>"
+            "<b>Год:</b> 2026</p>"
+            "<hr>"
+            "<p><b>Технологии:</b> C++17, Qt 6, SQLite, OpenGL 3.3</p>"
+        ));
+        about.setStandardButtons(QMessageBox::Ok);
+        about.exec();
         });
+
+    QAction* aboutQtAction = helpMenu->addAction(QString::fromUtf8("О &Qt"));
+    connect(aboutQtAction, &QAction::triggered, qApp, &QApplication::aboutQt);
 }
 
 void DigitalShopAWS::setupTabs()
