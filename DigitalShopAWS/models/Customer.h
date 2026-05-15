@@ -1,11 +1,10 @@
-#pragma once
-#pragma once
+п»ї#pragma once
 
 #include <QString>
 
 /**
- * @brief Модель клиента.
- * Связан с таблицей customers в БД.
+ * @brief РњРѕРґРµР»СЊ РєР»РёРµРЅС‚Р°.
+ * РЎРІСЏР·Р°РЅ СЃ С‚Р°Р±Р»РёС†РµР№ customers РІ Р‘Р”.
  */
 class Customer
 {

@@ -1,29 +1,29 @@
-#pragma once
+п»ї#pragma once
 
 #include "../models/Customer.h"
 #include <QList>
 #include <QString>
 
 /**
- * @brief Репозиторий клиентов.
+ * @brief Р РµРїРѕР·РёС‚РѕСЂРёР№ РєР»РёРµРЅС‚РѕРІ.
  *
- * Отвечает за загрузку и сохранение объектов Customer в таблицу customers.
- * Использует подключение из DatabaseManager::instance().
+ * РћС‚РІРµС‡Р°РµС‚ Р·Р° Р·Р°РіСЂСѓР·РєСѓ Рё СЃРѕС…СЂР°РЅРµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ Customer РІ С‚Р°Р±Р»РёС†Сѓ customers.
+ * РСЃРїРѕР»СЊР·СѓРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёРµ РёР· DatabaseManager::instance().
  */
 class CustomerRepository
 {
 public:
-    /// Возвращает всех клиентов, отсортированных по имени.
+    /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµС… РєР»РёРµРЅС‚РѕРІ, РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹С… РїРѕ РёРјРµРЅРё.
     QList<Customer> getAll();
 
-    /// Находит клиента по id. Если не найден, возвращает Customer() с id=0.
+    /// РќР°С…РѕРґРёС‚ РєР»РёРµРЅС‚Р° РїРѕ id. Р•СЃР»Рё РЅРµ РЅР°Р№РґРµРЅ, РІРѕР·РІСЂР°С‰Р°РµС‚ Customer() СЃ id=0.
     Customer getById(int id);
 
-    /// Сохраняет клиента. Если customer.isNew() — INSERT, иначе UPDATE.
-    /// При успешном INSERT обновляет customer.setId(...) присвоенным id.
+    /// РЎРѕС…СЂР°РЅСЏРµС‚ РєР»РёРµРЅС‚Р°. Р•СЃР»Рё customer.isNew() вЂ” INSERT, РёРЅР°С‡Рµ UPDATE.
+    /// РџСЂРё СѓСЃРїРµС€РЅРѕРј INSERT РѕР±РЅРѕРІР»СЏРµС‚ customer.setId(...) РїСЂРёСЃРІРѕРµРЅРЅС‹Рј id.
     bool save(Customer& customer);
 
-    /// Удаляет клиента по id.
+    /// РЈРґР°Р»СЏРµС‚ РєР»РёРµРЅС‚Р° РїРѕ id.
     bool remove(int id);
 
     QString lastError() const { return m_lastError; }
