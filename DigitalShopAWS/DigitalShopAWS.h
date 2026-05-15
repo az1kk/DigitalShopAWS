@@ -25,4 +25,6 @@ private:
     void setupTabs();
 
     QTabWidget* m_tabs = nullptr;
+    class QLabel* m_clockLabel = nullptr;
+    class QTimer* m_clockTimer = nullptr;
 };

@@ -17,6 +17,8 @@
 #include <QWidget>
 #include <QMessageBox>
 #include <QIcon>
+#include <QTimer>
+#include <QDateTime>
 
 DigitalShopAWS::DigitalShopAWS(QWidget* parent)
     : QMainWindow(parent)
@@ -102,5 +104,22 @@ void DigitalShopAWS::setupTabs()
 
 void DigitalShopAWS::setupStatusBar()
 {
-    statusBar()->showMessage("Готово");
+    QLabel* readyLabel = new QLabel(QString::fromUtf8("Готово"), this);
+    readyLabel->setStyleSheet("padding-left: 8px;");
+    statusBar()->addWidget(readyLabel);
+    // Часы справа в статус-баре
+    m_clockLabel = new QLabel(this);
+    m_clockLabel->setStyleSheet("padding-right: 8px;");
+    statusBar()->addPermanentWidget(m_clockLabel);
+
+    m_clockTimer = new QTimer(this);
+    connect(m_clockTimer, &QTimer::timeout, this, [this]() {
+        m_clockLabel->setText(
+            QDateTime::currentDateTime().toString("dd.MM.yyyy  HH:mm:ss"));
+        });
+    m_clockTimer->start(1000);
+
+    // Сразу показать время, не дожидаясь первого срабатывания таймера
+    m_clockLabel->setText(
+        QDateTime::currentDateTime().toString("dd.MM.yyyy  HH:mm:ss"));
 }
