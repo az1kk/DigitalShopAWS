@@ -123,6 +123,7 @@
     <ClCompile Include="ui\OrdersTab.cpp" />
     <ClCompile Include="ui\ProductEditDialog.cpp" />
     <ClCompile Include="ui\ProductsTab.cpp" />
+    <ClCompile Include="ui\StatisticsTab.cpp" />
     <ClCompile Include="utils\PasswordHasher.cpp" />
     <QtRcc Include="resources.qrc" />
     <QtUic Include="DigitalShopAWS.ui" />
@@ -157,6 +158,7 @@
     <QtMoc Include="ui\CreateOrderDialog.h" />
     <QtMoc Include="ui\OrdersTab.h" />
     <QtMoc Include="ui\AnalyticsTab.h" />
+    <QtMoc Include="ui\StatisticsTab.h" />
     <ClInclude Include="utils\PasswordHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

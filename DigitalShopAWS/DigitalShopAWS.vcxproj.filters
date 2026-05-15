@@ -123,6 +123,9 @@
     <ClCompile Include="ui\AnalyticsTab.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="ui\StatisticsTab.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sql\schema.sql">
@@ -202,6 +205,9 @@
       <Filter>opengl</Filter>
     </QtMoc>
     <QtMoc Include="ui\AnalyticsTab.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\StatisticsTab.h">
       <Filter>ui</Filter>
     </QtMoc>
   </ItemGroup>
