@@ -169,6 +169,9 @@
     <ClInclude Include="repositories\OrderRepository.h">
       <Filter>repositories</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="resources.qrc" />
@@ -210,5 +213,8 @@
     <QtMoc Include="ui\StatisticsTab.h">
       <Filter>ui</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
   </ItemGroup>
 </Project>
