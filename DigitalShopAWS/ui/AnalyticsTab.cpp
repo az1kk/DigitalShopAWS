@@ -1,11 +1,16 @@
 #include "AnalyticsTab.h"
 #include "../opengl/SalesChart3D.h"
+#include "../repositories/OrderRepository.h"
+#include "../models/Order.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QGroupBox>
+#include <QMap>
+#include <QDate>
+#include <QDateTime>
 
 AnalyticsTab::AnalyticsTab(QWidget* parent)
     : QWidget(parent)
@@ -91,15 +96,50 @@ void AnalyticsTab::rebuildLegend(const QVector<ChartBar>& bars)
 
 void AnalyticsTab::refresh()
 {
-    // === ВРЕМЕННЫЕ ТЕСТОВЫЕ ДАННЫЕ ===
-    // На следующем шаге заменим на реальные данные из БД.
+    // Берём оплаченные заказы и агрегируем выручку по месяцам.
+    OrderRepository orderRepo;
+    const QList<Order> all = orderRepo.getAll();
+
+    // Ключ карты — "YYYY-MM", значение — сумма выручки за этот месяц.
+    QMap<QString, double> revenueByMonth;
+
+    for (const Order& o : all) {
+        if (o.status() != Order::Status::Paid) {
+            continue;
+        }
+        // У оплаченного заказа берём дату оплаты, если есть; иначе — дату создания.
+        const QDateTime dt = o.paidAt().isValid() ? o.paidAt() : o.createdAt();
+        if (!dt.isValid()) {
+            continue;
+        }
+        const QString key = dt.toString("yyyy-MM");
+        revenueByMonth[key] += o.price();
+    }
+
+    // Строим список из 6 последних месяцев, начиная с того, что 5 месяцев назад,
+    // и заканчивая текущим. В каждом — либо реальная выручка, либо 0.
+    const QDate today = QDate::currentDate();
     QVector<ChartBar> bars;
-    bars.append({ QString::fromUtf8("Январь"),  120000 });
-    bars.append({ QString::fromUtf8("Февраль"),  85000 });
-    bars.append({ QString::fromUtf8("Март"),    156000 });
-    bars.append({ QString::fromUtf8("Апрель"),   98000 });
-    bars.append({ QString::fromUtf8("Май"),     142000 });
-    // =================================
+
+    static const QStringList monthNames = {
+        QString::fromUtf8("Янв"), QString::fromUtf8("Фев"), QString::fromUtf8("Мар"),
+        QString::fromUtf8("Апр"), QString::fromUtf8("Май"), QString::fromUtf8("Июн"),
+        QString::fromUtf8("Июл"), QString::fromUtf8("Авг"), QString::fromUtf8("Сен"),
+        QString::fromUtf8("Окт"), QString::fromUtf8("Ноя"), QString::fromUtf8("Дек")
+    };
+
+    for (int i = 5; i >= 0; --i) {
+        const QDate d = today.addMonths(-i);
+        const QString key = d.toString("yyyy-MM");
+        const double value = revenueByMonth.value(key, 0.0);
+
+        // Подпись: "Май 26" (месяц + последние 2 цифры года).
+        const QString label = QString("%1 %2")
+            .arg(monthNames.value(d.month() - 1))
+            .arg(d.year() % 100, 2, 10, QChar('0'));
+
+        bars.append({ label, value });
+    }
 
     m_chart->setData(bars);
     rebuildLegend(bars);
