@@ -1,0 +1,292 @@
+@startuml DigitalShopAWS
+' ============================================================
+'  Диаграмма классов проекта DigitalShopAWS
+'  АРМ менеджера магазина цифровых товаров
+' ============================================================
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam linetype ortho
+skinparam classFontName "Segoe UI"
+skinparam classFontSize 12
+skinparam packageStyle rectangle
+
+skinparam class {
+    BackgroundColor #F4F8FC
+    BorderColor #3A6EA5
+    ArrowColor #4A4A4A
+    AttributeFontColor #555555
+}
+
+skinparam package {
+    BackgroundColor #FAFAFA
+    BorderColor #B0B0B0
+    FontStyle bold
+}
+
+title Диаграмма классов — DigitalShopAWS
+
+' ============================================================
+'  Слой моделей данных
+' ============================================================
+package "Models (модели данных)" {
+
+    class Product {
+        - m_id : int
+        - m_categoryId : int
+        - m_name : QString
+        - m_description : QString
+        - m_price : double
+        --
+        + id() : int
+        + categoryId() : int
+        + name() : QString
+        + description() : QString
+        + price() : double
+        + isNew() : bool
+    }
+
+    class Customer {
+        - m_id : int
+        - m_name : QString
+        - m_email : QString
+        - m_phone : QString
+        --
+        + id() : int
+        + name() : QString
+        + email() : QString
+        + phone() : QString
+        + isNew() : bool
+    }
+
+    class User {
+        - m_id : int
+        - m_login : QString
+        - m_passwordHash : QString
+        - m_role : QString
+        --
+        + id() : int
+        + login() : QString
+        + passwordHash() : QString
+        + role() : QString
+        + isValid() : bool
+    }
+
+    class ProductKey {
+        - m_id : int
+        - m_productId : int
+        - m_keyValue : QString
+        - m_status : Status
+        - m_addedAt : QDateTime
+        - m_soldAt : QDateTime
+        --
+        + status() : Status
+        + isAvailable() : bool
+        + {static} statusToString() : QString
+        + {static} statusFromString() : Status
+    }
+
+    enum "ProductKey::Status" as PKStatus {
+        Available
+        Sold
+        Reserved
+    }
+
+    class Order {
+        - m_id : int
+        - m_customerId : int
+        - m_productId : int
+        - m_keyId : int
+        - m_price : double
+        - m_status : Status
+        - m_createdAt : QDateTime
+        - m_paidAt : QDateTime
+        --
+        + status() : Status
+        + price() : double
+        + {static} statusToString() : QString
+        + {static} statusFromString() : Status
+    }
+
+    enum "Order::Status" as OStatus {
+        Pending
+        Paid
+        Cancelled
+    }
+}
+
+ProductKey *-- PKStatus
+Order *-- OStatus
+
+' ============================================================
+'  Слой доступа к данным
+' ============================================================
+package "Repositories (доступ к данным)" {
+
+    class ProductRepository {
+        - m_lastError : QString
+        --
+        + getAll() : QList<Product>
+        + getById(id) : Product
+        + save(product) : bool
+        + remove(id) : bool
+        + lastError() : QString
+    }
+
+    class CustomerRepository {
+        - m_lastError : QString
+        --
+        + getAll() : QList<Customer>
+        + getById(id) : Customer
+        + save(customer) : bool
+        + remove(id) : bool
+        + lastError() : QString
+    }
+
+    class UserRepository {
+        - m_lastError : QString
+        --
+        + getByLogin(login) : User
+        + save(user) : bool
+        + lastError() : QString
+    }
+
+    class KeyRepository {
+        - m_lastError : QString
+        --
+        + getByProductId(pid) : QList<ProductKey>
+        + getAll() : QList<ProductKey>
+        + getById(id) : ProductKey
+        + countAvailable(pid) : int
+        + save(key) : bool
+        + remove(id) : bool
+        + reserveOneAvailable(pid) : ProductKey
+    }
+
+    class OrderRepository {
+        - m_lastError : QString
+        --
+        + getAll() : QList<Order>
+        + getById(id) : Order
+        + createOrder(cid, pid) : Order
+        + confirmPayment(orderId) : bool
+        + cancelOrder(orderId) : bool
+        - rowToOrder(q) : Order
+    }
+}
+
+' Репозитории работают со своими моделями (зависимость)
+ProductRepository  ..> Product   : использует
+CustomerRepository ..> Customer  : использует
+UserRepository     ..> User      : использует
+KeyRepository      ..> ProductKey : использует
+OrderRepository    ..> Order     : использует
+
+' ============================================================
+'  Слой базы данных
+' ============================================================
+package "Database (подключение к БД)" {
+
+    class DatabaseManager <<Singleton>> {
+        - m_db : QSqlDatabase
+        - m_initialized : bool
+        --
+        + {static} instance() : DatabaseManager&
+        + initialize(path) : bool
+        + database() : QSqlDatabase
+        + isOpen() : bool
+        + close() : void
+        - runSchema() : bool
+    }
+}
+
+' Все репозитории получают подключение из DatabaseManager
+ProductRepository  ..> DatabaseManager
+CustomerRepository ..> DatabaseManager
+UserRepository     ..> DatabaseManager
+KeyRepository      ..> DatabaseManager
+OrderRepository    ..> DatabaseManager
+
+' ============================================================
+'  Утилиты
+' ============================================================
+package "Utils" {
+
+    class PasswordHasher {
+        + {static} hash(password) : QString
+        + {static} verify(password, hash) : bool
+    }
+}
+
+' ============================================================
+'  Слой пользовательского интерфейса
+' ============================================================
+package "UI (интерфейс, Qt Widgets)" {
+
+    class DigitalShopAWS <<QMainWindow>> {
+        - m_tabs : QTabWidget*
+        - m_clockLabel : QLabel*
+        - m_clockTimer : QTimer*
+        --
+        - setupTabs() : void
+        - setupMenuBar() : void
+        - setupStatusBar() : void
+    }
+
+    class LoginDialog <<QDialog>> {
+        + getAuthenticatedUser() : User
+    }
+
+    class "Вкладки и диалоги" as UITabs {
+        ProductsTab / ProductEditDialog
+        CustomersTab / CustomerEditDialog
+        KeysTab / KeyEditDialog
+        OrdersTab / CreateOrderDialog
+        StatisticsTab
+        AnalyticsTab
+    }
+
+    class SalesChart3D <<QOpenGLWidget>> {
+        - m_program : QOpenGLShaderProgram
+        - m_vbo : QOpenGLBuffer
+        - m_vao : QOpenGLVertexArrayObject
+        - m_bars : QVector<ChartBar>
+        --
+        + setData(bars) : void
+        # initializeGL() : void
+        # paintGL() : void
+        # resizeGL(w, h) : void
+        - drawScene() : void
+        - drawLabels(painter) : void
+    }
+
+    struct ChartBar {
+        + label : QString
+        + value : double
+    }
+}
+
+' Композиция: главное окно содержит вкладки и диалоги
+DigitalShopAWS *-- UITabs
+DigitalShopAWS ..> LoginDialog
+UITabs *-- SalesChart3D
+SalesChart3D *-- ChartBar
+
+' UI использует репозитории
+LoginDialog ..> UserRepository
+LoginDialog ..> PasswordHasher
+UITabs ..> ProductRepository
+UITabs ..> CustomerRepository
+UITabs ..> KeyRepository
+UITabs ..> OrderRepository
+
+' Точка входа
+class "main()" as Main <<entry point>> {
+    + main(argc, argv) : int
+}
+
+Main ..> DatabaseManager : initialize()
+Main ..> LoginDialog
+Main ..> DigitalShopAWS
+
+@enduml
