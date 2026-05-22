@@ -5,13 +5,19 @@
 class QTableWidget;
 class QPushButton;
 class QComboBox;
+class QCheckBox;
 
 /**
  * @brief Вкладка управления складом ключей.
  *
- * В таблице показаны все ключи: id, товар, значение, статус, дата добавления.
- * Сверху — фильтр по товару, позволяющий показать ключи только одного товара.
- * При добавлении можно вставить сразу пачку ключей.
+ * В таблице показаны живые ключи: доступные и зарезервированные.
+ * Проданные ключи по умолчанию скрыты — они относятся к истории
+ * заказов и показываются на вкладке "Заказы" в колонке "Ключ".
+ * При необходимости проданные можно показать чекбоксом
+ * "Показать проданные".
+ *
+ * Сверху — фильтр по товару. При добавлении можно вставить сразу
+ * пачку ключей.
  */
 class KeysTab : public QWidget
 {
@@ -34,10 +40,11 @@ private:
     void reloadProductFilter();
     int selectedKeyId() const;
 
-    QComboBox* m_productFilter = nullptr;
-    QTableWidget* m_table = nullptr;
-    QPushButton* m_addBtn = nullptr;
-    QPushButton* m_editBtn = nullptr;
-    QPushButton* m_deleteBtn = nullptr;
-    QPushButton* m_refreshBtn = nullptr;
+    QComboBox*    m_productFilter = nullptr;
+    QCheckBox*    m_showSoldCheck = nullptr;
+    QTableWidget* m_table         = nullptr;
+    QPushButton*  m_addBtn        = nullptr;
+    QPushButton*  m_editBtn       = nullptr;
+    QPushButton*  m_deleteBtn     = nullptr;
+    QPushButton*  m_refreshBtn    = nullptr;
 };

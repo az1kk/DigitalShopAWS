@@ -8,6 +8,7 @@
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QPushButton>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -30,7 +31,6 @@ namespace {
 
     QColor statusTextColor(ProductKey::Status s)
     {
-        // Тёмный текст для всех цветных фонов — читаем на любой системной теме.
         Q_UNUSED(s);
         return QColor(40, 40, 40);
     }
@@ -59,6 +59,15 @@ void KeysTab::setupUi()
 {
     m_productFilter = new QComboBox(this);
 
+    // Чекбокс "Показать проданные" — по умолчанию выключен.
+    // Концепция: эта вкладка — это склад живых ключей, проданные
+    // ключи относятся к истории заказов и показываются на вкладке
+    // "Заказы" в колонке "Ключ". Здесь они скрыты, чтобы не загромождать
+    // склад. При необходимости (например, поиск по истории) их можно
+    // временно показать.
+    m_showSoldCheck = new QCheckBox("Показать проданные", this);
+    m_showSoldCheck->setChecked(false);
+
     m_table = new QTableWidget(this);
     m_table->setColumnCount(5);
     m_table->setHorizontalHeaderLabels({ "ID", "Товар", "Ключ", "Статус", "Добавлен" });
@@ -80,6 +89,8 @@ void KeysTab::setupUi()
     QHBoxLayout* filterRow = new QHBoxLayout;
     filterRow->addWidget(new QLabel("Фильтр по товару:"));
     filterRow->addWidget(m_productFilter, 1);
+    filterRow->addSpacing(16);
+    filterRow->addWidget(m_showSoldCheck);
 
     QHBoxLayout* buttons = new QHBoxLayout;
     buttons->addWidget(m_addBtn);
@@ -101,6 +112,8 @@ void KeysTab::setupUi()
 
     connect(m_productFilter, &QComboBox::currentIndexChanged,
         this, &KeysTab::onFilterChanged);
+    connect(m_showSoldCheck, &QCheckBox::toggled,
+        this, &KeysTab::onFilterChanged);
 
     connect(m_table, &QTableWidget::doubleClicked,
         this, &KeysTab::onEditClicked);
@@ -120,7 +133,6 @@ void KeysTab::reloadProductFilter()
         m_productFilter->addItem(p.name(), p.id());
     }
 
-    // Восстанавливаем выбор фильтра, если возможно.
     for (int i = 0; i < m_productFilter->count(); ++i) {
         if (m_productFilter->itemData(i).toInt() == previousProductId) {
             m_productFilter->setCurrentIndex(i);
@@ -137,13 +149,12 @@ void KeysTab::onFilterChanged()
 
 void KeysTab::refresh()
 {
-    // Загружаем все ключи и (для подписи) имена товаров.
     KeyRepository keyRepo;
     ProductRepository prodRepo;
 
     QList<ProductKey> keys = keyRepo.getAll();
 
-    // Фильтрация по выбранному товару.
+    // Фильтр по товару.
     const int filterId = m_productFilter->currentData().toInt();
     if (filterId > 0) {
         QList<ProductKey> filtered;
@@ -155,7 +166,20 @@ void KeysTab::refresh()
         keys = filtered;
     }
 
-    // Кэш имён товаров: id -> name. Чтобы не дёргать БД по разу на ключ.
+    // Фильтр по статусу: по умолчанию проданные не показываем.
+    // Склад — это живые ключи (доступные и зарезервированные).
+    // Проданные относятся к истории заказов и доступны на вкладке "Заказы".
+    if (!m_showSoldCheck->isChecked()) {
+        QList<ProductKey> alive;
+        for (const ProductKey& k : keys) {
+            if (k.status() != ProductKey::Status::Sold) {
+                alive.append(k);
+            }
+        }
+        keys = alive;
+    }
+
+    // Кэш имён товаров: id -> name.
     QHash<int, QString> productNames;
     for (const Product& p : prodRepo.getAll()) {
         productNames.insert(p.id(), p.name());
@@ -196,8 +220,6 @@ int KeysTab::selectedKeyId() const
 
 void KeysTab::onAddClicked()
 {
-    // Каждый раз перед открытием обновим список товаров —
-    // вдруг на вкладке "Товары" что-то добавили.
     reloadProductFilter();
 
     KeyEditDialog dlg(this);
